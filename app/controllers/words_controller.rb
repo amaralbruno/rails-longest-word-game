@@ -1,11 +1,9 @@
 class WordsController < ApplicationController
 
-  before_action :grid
-
   def score
     @try = params[:guess]
 
-    @grid
+    @grid = params[:grid].delete(' ').split(",").to_sentence(last_word_connector: ', ')
     @start_time = params[:starttime]
     @end_time = params[:endtime]
 
@@ -15,14 +13,11 @@ class WordsController < ApplicationController
 
   def game
     @time = Time.now
-  end
-
-  private
-
-  def grid
     g = generate_grid(20)
     @grid = g.to_sentence(last_word_connector: ', ')
   end
+
+  private
 
   def generate_grid(grid_size)
   # TODO: generate random grid of letters
@@ -51,7 +46,7 @@ class WordsController < ApplicationController
           a.delete_at(a.index(letter))
           hash[:translation] = raw_json["term0"]["PrincipalTranslations"]["0"]["FirstTranslation"]["term"]
           hash[:message] = "well done"
-          hash[:score] = (attempt.size * ((end_time - start_time) * 10)) / 100000000
+          hash[:score] = (attempt.size * ((end_time - start_time) * 10)) / 1000000000
         else
           hash[:message] = "not in the grid"
           hash[:score] = 0
