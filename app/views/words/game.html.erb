@@ -1,7 +1,9 @@
-<form action="/score" method="get">
-  <label for="guess"><h1><%= @grid %></h1></label>
-  <input type="text" name="guess" placeholder="Type your word...">
-  <input type="hidden" name="grid" value="<%= @grid %>">
-  <input type="hidden" name="starttime" value="<%= @time %>">
-  <input type="submit">
-</form>
+<center>
+  <form action="/score" method="get">
+    <label for="guess"><h1><%= @grid %></h1></label>
+    <input type="text" name="guess" placeholder="Type your word...">
+    <input type="hidden" name="grid" value="<%= @grid %>">
+    <input type="hidden" name="starttime" value="<%= @time %>">
+    <input type="submit">
+  </form>
+</center>

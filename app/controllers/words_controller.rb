@@ -1,9 +1,11 @@
 class WordsController < ApplicationController
 
+  before_action :grid
+
   def score
     @try = params[:guess]
 
-    @grid = params[:grid].delete(' ').split(",")
+    @grid
     @start_time = params[:starttime]
     @end_time = params[:endtime]
 
@@ -13,11 +15,14 @@ class WordsController < ApplicationController
 
   def game
     @time = Time.now
-    g = generate_grid(20)
-    @grid = g.to_sentence(last_word_connector: ', ')
   end
 
   private
+
+  def grid
+    g = generate_grid(20)
+    @grid = g.to_sentence(last_word_connector: ', ')
+  end
 
   def generate_grid(grid_size)
   # TODO: generate random grid of letters
